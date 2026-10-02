@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agile, Scrum & SAFe 6.0 Knowledge Repository</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Phosphor Icons -->
+  <script src="https://unpkg.com/@phosphor-icons/web"></script>
+  <!-- Tailwind Configuration for professional executive slate & indigo palette -->
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              100: '#e0e7ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              800: '#3730a3',
+              900: '#312e81',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+    
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    
+    code, pre {
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .accordion-transition {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Print optimization */
+    @media print {
+      header, aside, #toolbar, .no-print, #photoUploaderBtn {
+        display: none !important;
+      }
+      main, .accordion-body {
+        display: block !important;
+        opacity: 1 !important;
+        max-height: none !important;
+        box-shadow: none !important;
+        border-color: #cbd5e1 !important;
+      }
+      body {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 dark:bg-slate-950 dark:text-slate-100 antialiased min-h-screen flex flex-col selection:bg-brand-500 selection:text-white">
+
+  <!-- Top Navigation Header -->
+  <header class="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur border-b border-slate-200 dark:border-slate-800 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
+      <div class="flex items-center space-x-3 min-w-0">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-indigo-500 text-white flex items-center justify-center shadow-md shadow-brand-500/20 shrink-0 font-extrabold text-sm tracking-wider">
+          PG
+        </div>
+        <div class="min-w-0">
+          <h1 class="text-sm sm:text-base font-bold text-slate-900 dark:text-white truncate tracking-tight">Prahlad Gupta</h1>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">Agile Delivery Lead & Senior Scrum Master</p>
+        </div>
+      </div>
+
+      <!-- Action Utilities -->
+      <div class="flex items-center space-x-2 shrink-0">
+        <button id="themeToggleBtn" aria-label="Toggle theme" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition">
+          <i id="themeIcon" class="ph-bold ph-moon text-lg"></i>
+        </button>
+        <button id="copyMdBtn" class="hidden sm:inline-flex items-center px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-700 shadow-sm transition">
+          <i class="ph-bold ph-copy mr-1.5 text-brand-600"></i> Copy Markdown
+        </button>
+        <button id="printBtn" class="inline-flex items-center px-3.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-semibold shadow-sm shadow-brand-500/30 transition">
+          <i class="ph-bold ph-printer mr-1.5"></i> Export PDF / CV
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Executive Profile Hero Section -->
+  <section class="bg-white dark:bg-slate-900 border-b border-slate-200/90 dark:border-slate-800 py-8 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center md:items-start gap-6 lg:gap-8">
+        
+        <!-- Profile Headshot with Status Badge -->
+        <div class="relative shrink-0 group">
+          <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl p-1 bg-gradient-to-tr from-brand-600 via-indigo-500 to-emerald-400 shadow-xl shadow-brand-500/10">
+            <img id="userAvatarImg" 
+                 src="Professional Office Headshot.png" 
+                 alt="Prahlad Gupta - Senior Scrum Master" 
+                 class="w-full h-full object-cover object-top rounded-xl bg-slate-100 dark:bg-slate-800"
+                 onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80';">
+          </div>
+          <span class="absolute -bottom-2 -right-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold tracking-wide uppercase bg-emerald-500 text-white shadow-md flex items-center gap-1 border-2 border-white dark:border-slate-900">
+            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span> Available
+          </span>
+          <input type="file" id="avatarFileInput" accept="image/*" class="hidden">
+          <button id="changePhotoBtn" title="Click to customize local photo if needed" class="no-print absolute top-2 right-2 bg-slate-900/70 hover:bg-slate-900 text-white p-1.5 rounded-lg opacity-0 group-hover:opacity-100 transition text-xs">
+            <i class="ph-bold ph-camera"></i>
+          </button>
+        </div>
+
+        <!-- Executive Details & Contacts -->
+        <div class="flex-1 text-center md:text-left min-w-0">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 dark:bg-brand-950/60 border border-brand-200/80 dark:border-brand-800/80 text-brand-700 dark:text-brand-300 text-xs font-semibold mb-2.5">
+            <i class="ph-fill ph-seal-check text-brand-600 dark:text-brand-400"></i>
+            Senior Scrum Master • Agile Delivery Lead • SAFe Practitioner
+          </div>
+          
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 dark:text-white tracking-tight">
+            PRAHLAD GUPTA
+          </h2>
+
+          <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400 font-medium flex items-center justify-center md:justify-start gap-1.5 mt-1">
+            <i class="ph-fill ph-map-pin text-rose-500"></i> Pune, Maharashtra, India - 412207
+          </p>
+
+          <!-- Interactive Contact Bar -->
+          <div class="mt-4 flex flex-wrap items-center justify-center md:justify-start gap-2.5 sm:gap-3 text-xs">
+            <a href="tel:+917003988638" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-brand-50 hover:text-brand-700 dark:hover:bg-brand-950/50 dark:hover:text-brand-300 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-200 transition">
+              <i class="ph-fill ph-phone-call text-emerald-600"></i>
+              <span>+91 7003988638</span>
+            </a>
+            <a href="tel:+918620925085" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-brand-50 hover:text-brand-700 dark:hover:bg-brand-950/50 dark:hover:text-brand-300 border border-slate-200 dark:border-slate-700 font-semibold text-slate-700 dark:text-slate-200 transition">
+              <i class="ph-fill ph-phone text-emerald-600"></i>
+              <span>+91 8620925085</span>
+            </a>
+            <a href="mailto:prahladgupta240886@gmail.com" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-brand-50/70 dark:bg-brand-950/40 hover:bg-brand-100 dark:hover:bg-brand-900/60 border border-brand-200 dark:border-brand-800 font-semibold text-brand-700 dark:text-brand-300 transition">
+              <i class="ph-fill ph-envelope text-brand-600"></i>
+              <span>prahladgupta240886@gmail.com</span>
+            </a>
+          </div>
+
+          <!-- Professional Bio Summary -->
+          <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 mt-3.5 max-w-3xl leading-relaxed">
+            Seasoned Agile practitioner focused on facilitating high-performing engineering teams, maximizing throughput, and operationalizing modern Scrum and Scaled Agile (SAFe 6.0) frameworks across enterprise programs. Below is my curated delivery playbook and reference manual.
+          </p>
+        </div>
+
+        <!-- Metric Badges -->
+        <div class="grid grid-cols-3 md:grid-cols-1 gap-2.5 shrink-0 w-full md:w-auto">
+          <div class="px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
+            <span class="block text-lg font-bold text-brand-600 dark:text-brand-400">10</span>
+            <span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Agile Modules</span>
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
+            <span class="block text-lg font-bold text-emerald-600 dark:text-emerald-400">50+</span>
+            <span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">Key Practices</span>
+          </div>
+          <div class="px-4 py-2 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-700 text-center">
+            <span class="block text-lg font-bold text-indigo-600 dark:text-indigo-400">v6.0</span>
+            <span class="text-[10px] text-slate-500 dark:text-slate-400 uppercase tracking-wider font-semibold">SAFe Aligned</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Content & Control Layout -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+    <!-- Left Navigation Sticky Sidebar (Desktop) -->
+    <aside class="hidden lg:block lg:col-span-3 sticky top-24 space-y-4">
+      <div class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm">
+        <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3 px-2 flex items-center justify-between">
+          <span>Table of Contents</span>
+          <i class="ph ph-list-numbers text-sm"></i>
+        </h3>
+        <nav id="tocNav" class="space-y-1 text-xs">
+          <!-- Dynamic Quick Links built via JS -->
+        </nav>
+      </div>
+
+      <!-- Quick Tips Card -->
+      <div class="bg-gradient-to-br from-indigo-50/80 to-brand-50/40 dark:from-slate-900 dark:to-brand-950/30 rounded-2xl p-4 border border-indigo-100 dark:border-slate-800">
+        <div class="flex items-center gap-2 text-indigo-900 dark:text-indigo-300 font-semibold text-xs mb-1.5">
+          <i class="ph-bold ph-lightbulb"></i>
+          <span>Portfolio Tip</span>
+        </div>
+        <p class="text-[11px] text-slate-600 dark:text-slate-400 leading-relaxed">
+          Embed or link this document directly on LinkedIn, resume summaries, or GitHub Pages to showcase structured agile leadership acumen.
+        </p>
+      </div>
+    </aside>
+
+    <!-- Main Content Column -->
+    <main class="lg:col-span-9 flex flex-col gap-5">
+      
+      <!-- Sticky Filter & Search Toolbar -->
+      <div id="toolbar" class="bg-white dark:bg-slate-900 rounded-2xl p-4 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col gap-4">
+        <div class="flex flex-col sm:flex-row gap-3 items-center justify-between">
+          <!-- Live Search Bar -->
+          <div class="relative w-full sm:w-80">
+            <i class="ph ph-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-base"></i>
+            <input type="text" id="liveSearch" placeholder="Search principles, metrics, DoR, SAFe..." 
+                   class="w-full pl-10 pr-9 py-2 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition text-slate-800 dark:text-slate-200 placeholder:text-slate-400 dark:placeholder:text-slate-500">
+            <button id="clearSearch" class="hidden absolute right-3 top-2.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200">
+              <i class="ph ph-x-circle text-base"></i>
+            </button>
+          </div>
+
+          <!-- Expand / Collapse All Controls -->
+          <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
+            <button id="expandAll" class="inline-flex items-center px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition">
+              <i class="ph-bold ph-plus mr-1"></i> Expand All
+            </button>
+            <button id="collapseAll" class="inline-flex items-center px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition">
+              <i class="ph-bold ph-minus mr-1"></i> Collapse All
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Tags -->
+        <div class="flex items-center gap-1.5 overflow-x-auto pb-1 text-xs no-scrollbar" id="categoryChips">
+          <button data-cat="all" class="cat-pill active-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-brand-600 text-white shadow-sm">All</button>
+          <button data-cat="Scrum Core" class="cat-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Scrum Core</button>
+          <button data-cat="Manifesto" class="cat-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Manifesto</button>
+          <button data-cat="Refinement" class="cat-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Refinement</button>
+          <button data-cat="Quality Gates" class="cat-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Quality Gates</button>
+          <button data-cat="Retrospectives" class="cat-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Retrospectives</button>
+          <button data-cat="Metrics" class="cat-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">Metrics</button>
+          <button data-cat="SAFe 6.0" class="cat-pill px-3 py-1 rounded-lg font-medium whitespace-nowrap bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">SAFe 6.0</button>
+        </div>
+      </div>
+
+      <!-- Accordion Container with 10 Note Sections -->
+      <div id="accordionContainer" class="space-y-4">
+
+        <!-- SECTION 1 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Scrum Core" id="section-1">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-brand-600 text-white flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">−</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-blue-100 dark:bg-blue-900/40 text-blue-700 dark:text-blue-300">Scrum Core</span>
+                  <span class="text-xs text-slate-400 font-mono">01</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Core Agile & Scrum Foundations</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 rotate-180 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm space-y-5">
+            <!-- Definitions Card -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                <span class="text-xs font-bold text-brand-600 dark:text-brand-400 uppercase tracking-wide flex items-center gap-1.5 mb-1.5">
+                  <i class="ph-bold ph-compass"></i> Agile Philosophy
+                </span>
+                <p class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+                  A high-level project management philosophy emphasizing flexibility, incremental delivery, customer feedback, and continuous collaborative improvement.
+                </p>
+              </div>
+              <div class="p-4 rounded-xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60">
+                <span class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wide flex items-center gap-1.5 mb-1.5">
+                  <i class="ph-bold ph-git-commit"></i> Scrum Framework
+                </span>
+                <p class="text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+                  A concrete, structured agile framework providing designated roles, events, and artifacts to execute complex work in fixed, short-cadence cycles termed <em>sprints</em>.
+                </p>
+              </div>
+            </div>
+
+            <!-- Pillars & Values -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2.5">Three Empirical Pillars of Scrum</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800">
+                  <strong class="text-slate-900 dark:text-white block font-semibold text-xs">1. Transparency</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Process and state must be visible to those managing and executing work.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800">
+                  <strong class="text-slate-900 dark:text-white block font-semibold text-xs">2. Inspection</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Frequent cadence to check progress toward sprint objectives and detect variance.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800">
+                  <strong class="text-slate-900 dark:text-white block font-semibold text-xs">3. Adaptation</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Prompt adjustment of processes or materials when deviations occur.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Scrum Values & Principles -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 pt-1">
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2">5 Scrum Values</h4>
+                <div class="flex flex-wrap gap-1.5">
+                  <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">Courage</span>
+                  <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">Commitment</span>
+                  <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">Focus</span>
+                  <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">Openness</span>
+                  <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-xs font-medium text-slate-700 dark:text-slate-300">Respect</span>
+                </div>
+              </div>
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2">6 Scrum Principles</h4>
+                <ul class="space-y-1 text-xs text-slate-600 dark:text-slate-300 list-disc list-inside">
+                  <li><strong>Empirical Process Control:</strong> Observation & experimentation over rigid planning</li>
+                  <li><strong>Self-Organization:</strong> Teams define the path to goals</li>
+                  <li><strong>Collaboration:</strong> Continuous joint problem-solving</li>
+                  <li><strong>Value-Based Prioritization:</strong> Business value drives order</li>
+                  <li><strong>Time-Boxing:</strong> Fixed limits for all activities</li>
+                  <li><strong>Iterative Development:</strong> Incremental refinements</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 2 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Manifesto" id="section-2">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-emerald-100 dark:bg-emerald-900/40 text-emerald-700 dark:text-emerald-300">Manifesto</span>
+                  <span class="text-xs text-slate-400 font-mono">02</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Agile Manifesto: 4 Values & 12 Principles</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm space-y-6">
+            <!-- 4 Values -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-3">The 4 Core Values</h4>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-2.5">
+                <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-800/50 flex items-center justify-between">
+                  <span class="font-semibold text-emerald-900 dark:text-emerald-200 text-xs">Individuals & Interactions</span>
+                  <span class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">over processes & tools</span>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-800/50 flex items-center justify-between">
+                  <span class="font-semibold text-emerald-900 dark:text-emerald-200 text-xs">Working Software</span>
+                  <span class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">over comprehensive docs</span>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-800/50 flex items-center justify-between">
+                  <span class="font-semibold text-emerald-900 dark:text-emerald-200 text-xs">Customer Collaboration</span>
+                  <span class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">over contract negotiation</span>
+                </div>
+                <div class="p-3 rounded-xl bg-emerald-50/40 dark:bg-emerald-950/20 border border-emerald-200/60 dark:border-emerald-800/50 flex items-center justify-between">
+                  <span class="font-semibold text-emerald-900 dark:text-emerald-200 text-xs">Responding to Change</span>
+                  <span class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">over following a plan</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 12 Principles -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-3">12 Agile Principles</h4>
+              <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs text-slate-600 dark:text-slate-300">
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">1. Customer Satisfaction:</strong> Highest priority via early & continuous delivery.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">2. Welcome Change:</strong> Harness changing requirements even late in development for competitive advantage.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">3. Frequent Delivery:</strong> Working software delivered frequently (weeks over months).
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">4. Daily Collaboration:</strong> Business stakeholders and developers must work together daily.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">5. Motivated Individuals:</strong> Build projects around motivated individuals; give trust & environment.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">6. Face-to-Face Contact:</strong> Most effective method of conveying information to and within teams.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">7. Working Software:</strong> The primary measure of progress.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">8. Sustainable Pace:</strong> Maintain a constant, sustainable work pace indefinitely.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">9. Technical Excellence:</strong> Good design and architecture enhance operational agility.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">10. Simplicity:</strong> The essential art of maximizing the amount of work not done.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">11. Self-Organizing Teams:</strong> Best architectures and requirements emerge from self-organizing units.
+                </li>
+                <li class="p-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
+                  <strong class="text-slate-900 dark:text-white font-semibold">12. Reflect & Adjust:</strong> Team regularly inspects and tunes behavior to increase velocity.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 3 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Refinement" id="section-3">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">Refinement</span>
+                  <span class="text-xs text-slate-400 font-mono">03</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">User Story Principle: INVEST (By Bill Wake)</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm">
+            <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">
+              A foundational mnemonic guide created by Bill Wake to evaluate the quality of user stories before entering sprint commitment.
+            </p>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center text-xs mb-2">I</div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs">Independent</h4>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Stories should be self-contained so they can be scheduled and implemented without inter-story coupling.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center text-xs mb-2">N</div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs">Negotiable</h4>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">A story is an invitation to conversation, not an unchangeable contract; scope can be calibrated with the PO.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center text-xs mb-2">V</div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs">Valuable</h4>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Must provide discernible, measurable value to end-users, customers, or business stakeholders.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center text-xs mb-2">E</div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs">Estimable</h4>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Sufficiently clear in scope to allow team members to size complexity and relative effort reliably.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center text-xs mb-2">S</div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs">Small</h4>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Sized appropriately to easily finish within a single sprint timeframe without rolling over.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                <div class="w-7 h-7 rounded-lg bg-indigo-100 dark:bg-indigo-900/50 text-indigo-600 dark:text-indigo-400 font-bold flex items-center justify-center text-xs mb-2">T</div>
+                <h4 class="font-bold text-slate-900 dark:text-white text-xs">Testable</h4>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Explicit acceptance criteria enabling automated or manual QA pass/fail validation.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 4 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Refinement" id="section-4">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">Refinement</span>
+                  <span class="text-xs text-slate-400 font-mono">04</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Product Backlog Refinement & Prioritization</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm space-y-6">
+            <div class="p-3.5 rounded-xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-800 text-xs text-slate-600 dark:text-slate-300">
+              <strong>Core Objective:</strong> The ongoing process of preparing backlog items for sprint planning through clarification, prioritization, and relative estimation to ensure they are development-ready.
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+              <!-- Detailing -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2.5">1. Detailing & Clarification</h4>
+                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+                  <li class="flex items-start gap-1.5"><i class="ph-bold ph-check text-brand-600 mt-0.5"></i> <span><strong>User Story Refinement:</strong> Breakdown into smaller functional increments.</span></li>
+                  <li class="flex items-start gap-1.5"><i class="ph-bold ph-check text-brand-600 mt-0.5"></i> <span><strong>Requirement Clarity:</strong> Shared stakeholder understanding.</span></li>
+                  <li class="flex items-start gap-1.5"><i class="ph-bold ph-check text-brand-600 mt-0.5"></i> <span><strong>Acceptance Criteria:</strong> Objective pass/fail bounds.</span></li>
+                  <li class="flex items-start gap-1.5"><i class="ph-bold ph-check text-brand-600 mt-0.5"></i> <span><strong>Dependencies:</strong> External blockers proactively resolved.</span></li>
+                  <li class="flex items-start gap-1.5"><i class="ph-bold ph-check text-brand-600 mt-0.5"></i> <span><strong>Progressive Elaboration:</strong> Adding detail as items near the top.</span></li>
+                </ul>
+              </div>
+
+              <!-- Prioritization -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2.5">2. Prioritization Frameworks</h4>
+                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+                  <li class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
+                    <strong>Value-Driven:</strong> Ordering by direct business impact.
+                  </li>
+                  <li class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
+                    <strong>MoSCoW:</strong> Must have, Should have, Could have, Won't have.
+                  </li>
+                  <li class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
+                    <strong>Stack Ranking:</strong> Strict 1-to-N serial priority list.
+                  </li>
+                  <li class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
+                    <strong>Kano Model:</strong> Satisfaction vs. feature execution.
+                  </li>
+                  <li class="p-2 rounded-lg bg-slate-50 dark:bg-slate-800/40 border border-slate-100 dark:border-slate-800">
+                    <strong>Cost of Delay:</strong> Weighing speed against missed economic gain.
+                  </li>
+                </ul>
+              </div>
+
+              <!-- Management -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2.5">3. Backlog Management</h4>
+                <ul class="space-y-2 text-xs text-slate-600 dark:text-slate-300">
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-calendar text-slate-400"></i> Regular refinement cadence meetings</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-arrows-clockwise text-slate-400"></i> Manage emergent items based on new data</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-trash text-rose-500"></i> Aggressively eliminate duplicate stories</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-git-fork text-slate-400"></i> Decompose large Epics into sprint stories</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-archive text-slate-400"></i> Prune and remove outdated or irrelevant items</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 5 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Refinement" id="section-5">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-purple-100 dark:bg-purple-900/40 text-purple-700 dark:text-purple-300">Refinement</span>
+                  <span class="text-xs text-slate-400 font-mono">05</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Agile & User Story Estimation Techniques</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5">
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+                <span class="font-bold text-slate-900 dark:text-white block text-xs">1. Planning Poker</span>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Consensus-based gamified sizing where cards are revealed simultaneously to prevent anchoring bias.</p>
+              </div>
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+                <span class="font-bold text-slate-900 dark:text-white block text-xs">2. T-Shirt Sizing</span>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">XS, S, M, L, XL categorization designed for quick, coarse-grained estimation during roadmapping.</p>
+              </div>
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+                <span class="font-bold text-slate-900 dark:text-white block text-xs">3. Affinity Mapping</span>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Writing stories on cards, clustering by dependencies and similarities, then assigning group effort.</p>
+              </div>
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+                <span class="font-bold text-slate-900 dark:text-white block text-xs">4. Story Point Estimation</span>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Abstract relative metrics combining volume, complexity, risk, and technical effort.</p>
+              </div>
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+                <span class="font-bold text-slate-900 dark:text-white block text-xs">5. Bucket System</span>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1">Sorting large batches of user stories rapidly into predefined buckets of estimated complexity.</p>
+              </div>
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/60">
+                <span class="font-bold text-slate-900 dark:text-white block text-xs">6. Fibonacci Series</span>
+                <p class="text-[11px] text-slate-600 dark:text-slate-400 mt-1"><code class="text-brand-600 dark:text-brand-400 font-bold">1, 2, 3, 5, 8, 13, 21...</code> Reflects escalating uncertainty as task size increases.</p>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 6 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Quality Gates" id="section-6">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-amber-100 dark:bg-amber-900/40 text-amber-800 dark:text-amber-300">Quality Gates</span>
+                  <span class="text-xs text-slate-400 font-mono">06</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Quality Gates: Definition of Ready (DoR) vs. Definition of Done (DoD)</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- DoR Column -->
+              <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40">
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200 dark:border-slate-700">
+                  <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> Definition of Ready (DoR)
+                  </h4>
+                  <span class="text-[11px] font-mono text-slate-400">8 criteria</span>
+                </div>
+                
+                <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300 mb-4">
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> Well-defined scope</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> Acceptance criteria documented</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> No external dependencies blocking work</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> Task estimation completed</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> Prioritized in the backlog</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> Small user story meeting INVEST criteria</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> Resource and skill requirements identified</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check text-amber-500"></i> Stakeholder communication & approval secured</li>
+                </ul>
+
+                <div class="pt-3 border-t border-slate-200 dark:border-slate-700/60 text-[11px] text-slate-500 dark:text-slate-400">
+                  <strong>Key Benefits:</strong> Minimizes sprint spillover, guarantees clear acceptance targets, prevents context thrashing, and boosts team alignment.
+                </div>
+              </div>
+
+              <!-- DoD Column -->
+              <div class="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/60 dark:bg-slate-800/40">
+                <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-200 dark:border-slate-700">
+                  <h4 class="font-bold text-slate-900 dark:text-white text-xs uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Definition of Done (DoD)
+                  </h4>
+                  <span class="text-[11px] font-mono text-slate-400">11 criteria</span>
+                </div>
+                
+                <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 1. Code completion finalized</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 2. Working functionality verified</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 3. Performance optimization executed</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 4. Peer code review approved</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 5. Unit & QA test passed successfully</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 6. Acceptance criteria fully satisfied</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 7. User & system documentation updated</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 8. Build pipeline completed successfully</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 9. Code merged to target branch</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 10. Stakeholder communication concluded</li>
+                  <li class="flex items-center gap-2"><i class="ph-bold ph-check-circle text-emerald-500"></i> 11. Sign-off and approval by PM / PO</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 7 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Retrospectives" id="section-7">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-rose-100 dark:bg-rose-900/40 text-rose-700 dark:text-rose-300">Retrospectives</span>
+                  <span class="text-xs text-slate-400 font-mono">07</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Popular Sprint Retrospective Techniques</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm">
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3">
+              
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">Start, Stop, Continue</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Action-oriented framework for new initiatives to start, bad habits to stop, and winning habits to retain.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">Mad, Sad, Glad</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Emotional safety model categorizing team feelings (frustrations, disappointments, and celebrations).</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">4 Ls</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400"><strong class="text-brand-600 dark:text-brand-400">L</strong>oved, <strong class="text-brand-600 dark:text-brand-400">L</strong>earned, <strong class="text-brand-600 dark:text-brand-400">L</strong>acked, and <strong class="text-brand-600 dark:text-brand-400">L</strong>onged For.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">Rose, Bud, Thorn</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400"><strong>Rose:</strong> What went well.<br><strong>Bud:</strong> Opportunities.<br><strong>Thorn:</strong> Pain point or obstacle.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">Hot Air Balloon</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Combines retrospective reflection (hot air/sandbags) with futurespective visioning.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">Mountain Climber</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Metaphor of climbing an arduous summit; great for demanding or high-stress sprints.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">Movie Critique</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">Creative, gamified sprint debriefing conducted like reviewing a feature film release.</p>
+              </div>
+
+              <div class="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/50">
+                <span class="font-bold text-xs text-slate-900 dark:text-white block mb-1">Classic 3 Questions</span>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400">1. What went well?<br>2. What did not go well?<br>3. What can be improved?</p>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 8 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="Metrics" id="section-8">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-cyan-100 dark:bg-cyan-900/40 text-cyan-800 dark:text-cyan-300">Metrics</span>
+                  <span class="text-xs text-slate-400 font-mono">08</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Agile KPIs & Scrum Metrics</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              
+              <!-- Agile KPIs -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-3 flex items-center gap-1.5">
+                  <i class="ph-bold ph-chart-line-up text-cyan-600"></i> Agile KPIs (Executive Level)
+                </h4>
+                <div class="space-y-2.5">
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Customer Satisfaction:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Measures end-user sentiment and retention via CSAT/NPS across shipped releases.</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Time to Market:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Duration from initial concept formulation to user-facing production release.</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Return on Investment (ROI):</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Economic returns achieved relative to engineering capital expenditure.</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Product Quality:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Quantified by defect density and escaped bugs discovered in production.</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Business Value Delivered:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Measurable real-world impact and functional capability delivered.</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Scrum Metrics -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-3 flex items-center gap-1.5">
+                  <i class="ph-bold ph-gauge text-brand-600"></i> Scrum Operational Metrics
+                </h4>
+                <div class="space-y-2.5">
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Velocity:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Average story points accepted per sprint, measuring delivery capacity over time.</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Sprint Burndown:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Graph visualizing work remaining vs. ideal timeline to predict sprint goal attainment.</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Commitment vs. Completion Rate:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Percentage of planned work accepted at sprint review (reliability baseline).</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Lead Time:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Total duration from request intake to final production customer release.</p>
+                  </div>
+                  <div class="p-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-800/40">
+                    <span class="font-semibold text-xs text-slate-900 dark:text-white">Cycle Time:</span>
+                    <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5">Active elapsed development time from work start until completion.</p>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 9 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="SAFe 6.0" id="section-9">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300">SAFe 6.0</span>
+                  <span class="text-xs text-slate-400 font-mono">09</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">Scaled Agile Framework (SAFe): Overview & 10 Principles</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm space-y-6">
+            <!-- SAFe Overview & 4 Benefits -->
+            <div class="p-4 rounded-xl bg-indigo-50/50 dark:bg-indigo-950/20 border border-indigo-100 dark:border-indigo-900/50">
+              <p class="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed mb-3">
+                <strong>What is SAFe?</strong> A proven framework for large, complex enterprise organizations seeking to scale agile practices across multi-tiered teams, aligning hundreds of engineers around a synchronized business rhythm.
+              </p>
+              <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 pt-2 border-t border-indigo-100 dark:border-indigo-900/50 text-xs">
+                <div><span class="font-bold text-indigo-900 dark:text-indigo-200">1. Improved Alignment</span><p class="text-[10px] text-slate-500 dark:text-slate-400">Unifies teams and executive stakeholders around common outcomes.</p></div>
+                <div><span class="font-bold text-indigo-900 dark:text-indigo-200">2. Increased Productivity</span><p class="text-[10px] text-slate-500 dark:text-slate-400">Delivers verified working software in predictable cadence.</p></div>
+                <div><span class="font-bold text-indigo-900 dark:text-indigo-200">3. Enhanced Quality</span><p class="text-[10px] text-slate-500 dark:text-slate-400">Embeds built-in testing quality into every pipeline stage.</p></div>
+                <div><span class="font-bold text-indigo-900 dark:text-indigo-200">4. Better Decisions</span><p class="text-[10px] text-slate-500 dark:text-slate-400">Prioritizes initiatives strictly based on economic trade-offs.</p></div>
+              </div>
+            </div>
+
+            <!-- The 10 SAFe Principles -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-3">The 10 SAFe Principles</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#1 Take an economic view</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Decisions must factor in sequence, batch size, and cost of delay.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#2 Apply systems thinking</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Optimize total enterprise workflow rather than localized silos.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#3 Assume variability; preserve options</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Set-based design preserves architectural choices as empirical data grows.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#4 Build incrementally with fast learning cycles</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Rapid feedback loops ensure solution viability and risk mitigation.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#5 Base milestones on objective evaluation of working systems</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Validate progress using real running code rather than design paper.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#6 Make value flow without interruptions</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Visualize and limit WIP, shrink batch sizes, and optimize queues.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#7 Apply cadence, synchronize with cross-domain planning</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Regular cadence provides predictability; synchronization aligns multiple minds.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#8 Unlock intrinsic motivation of knowledge workers</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Empower teams through autonomy, mastery, purpose, and trust.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#9 Decentralize decision-making</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Push routine technical choices down; centralize only strategic, rare choices.</span>
+                </div>
+                <div class="p-3 rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-800/40">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">#10 Organize around value</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Structure teams around end-to-end value streams rather than department silos.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SECTION 10 -->
+        <article class="accordion-item bg-white dark:bg-slate-900 rounded-2xl border border-slate-200/90 dark:border-slate-800 shadow-sm overflow-hidden transition" data-category="SAFe 6.0" id="section-10">
+          <div class="accordion-header p-5 flex items-center justify-between cursor-pointer select-none bg-slate-50/50 dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition">
+            <div class="flex items-center gap-3.5 min-w-0">
+              <button class="toggle-btn w-8 h-8 rounded-xl bg-slate-200 dark:bg-slate-700 text-slate-800 dark:text-slate-100 flex items-center justify-center font-bold text-base transition-transform shrink-0" aria-label="Toggle section">
+                <span class="icon-indicator">+</span>
+              </button>
+              <div>
+                <div class="flex items-center gap-2 flex-wrap">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase bg-indigo-100 dark:bg-indigo-900/40 text-indigo-700 dark:text-indigo-300">SAFe 6.0</span>
+                  <span class="text-xs text-slate-400 font-mono">10</span>
+                </div>
+                <h3 class="text-base font-bold text-slate-900 dark:text-white mt-0.5">SAFe 6.0: Competencies, Values & Critical Analysis</h3>
+              </div>
+            </div>
+            <i class="ph ph-caret-down text-slate-400 text-lg transition-transform duration-200 caret-icon"></i>
+          </div>
+
+          <div class="accordion-body hidden px-6 py-5 border-t border-slate-100 dark:border-slate-800 text-sm space-y-6">
+            
+            <!-- 7 Competencies -->
+            <div>
+              <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-3">7 Core Competencies of Business Agility (SAFe 6.0)</h4>
+              <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                <div class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">1. Enterprise Solution Delivery</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Architecting world-class, large-scale cyber-physical systems.</span>
+                </div>
+                <div class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">2. Agile Product Delivery</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Customer-centric continuous delivery pipelines.</span>
+                </div>
+                <div class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">3. Team & Technical Agility</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">High-performing cross-functional agile development practices.</span>
+                </div>
+                <div class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">4. Lean-Agile Leadership</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Exemplifying mindset, principles, and leading organizational change.</span>
+                </div>
+                <div class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">5. Lean Portfolio Management</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Strategy, funding, and governance aligned to value streams.</span>
+                </div>
+                <div class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">6. Continuous Learning Culture</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Organization-wide commitment to relentless improvement.</span>
+                </div>
+                <div class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800/50 text-xs sm:col-span-2 md:col-span-1">
+                  <strong class="text-slate-900 dark:text-white block font-semibold">7. Organizational Agility</strong>
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400">Lean enterprise mindset allowing rapid pivots.</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Core Values & Critiques -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              
+              <!-- Core Values -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2.5">SAFe 6.0 Core Values</h4>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="p-2.5 rounded-lg bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 font-semibold text-indigo-950 dark:text-indigo-200">
+                    1. Alignment
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 font-semibold text-indigo-950 dark:text-indigo-200">
+                    2. Built-in Quality
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 font-semibold text-indigo-950 dark:text-indigo-200">
+                    3. Transparency
+                  </div>
+                  <div class="p-2.5 rounded-lg bg-indigo-50/50 dark:bg-indigo-950/30 border border-indigo-200 dark:border-indigo-900 font-semibold text-indigo-950 dark:text-indigo-200">
+                    4. Respect for People
+                  </div>
+                </div>
+              </div>
+
+              <!-- Criticisms / Trade-offs -->
+              <div>
+                <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 dark:text-slate-400 mb-2.5">Cons & Industry Criticisms</h4>
+                <ul class="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
+                  <li class="p-2 rounded-lg bg-rose-50/40 dark:bg-rose-950/20 border border-rose-200/50 dark:border-rose-900/40">
+                    <strong class="text-rose-900 dark:text-rose-300">Jargon Heavy:</strong> Steep learning curve and complex terminology.
+                  </li>
+                  <li class="p-2 rounded-lg bg-rose-50/40 dark:bg-rose-950/20 border border-rose-200/50 dark:border-rose-900/40">
+                    <strong class="text-rose-900 dark:text-rose-300">Startup Averse:</strong> Heavy overhead for small engineering groups (&lt;40–50 team members).
+                  </li>
+                  <li class="p-2 rounded-lg bg-rose-50/40 dark:bg-rose-950/20 border border-rose-200/50 dark:border-rose-900/40">
+                    <strong class="text-rose-900 dark:text-rose-300">Top-Down Hierarchy Risk:</strong> May inadvertently reintroduce waterfall command-and-control.
+                  </li>
+                  <li class="p-2 rounded-lg bg-rose-50/40 dark:bg-rose-950/20 border border-rose-200/50 dark:border-rose-900/40">
+                    <strong class="text-rose-900 dark:text-rose-300">Epic Definition Friction:</strong> Reinterpreting traditional lightweight agile concepts can create confusion.
+                  </li>
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Empty State for Searches -->
+      <div id="noResults" class="hidden text-center py-16 bg-white dark:bg-slate-900 rounded-2xl border border-dashed border-slate-300 dark:border-slate-800">
+        <i class="ph ph-magnifying-glass text-4xl text-slate-300 dark:text-slate-600 mb-2"></i>
+        <h4 class="text-base font-semibold text-slate-700 dark:text-slate-300">No matching sections found</h4>
+        <p class="text-xs text-slate-400 mt-1">Try another keyword like "DoR", "Scrum", "INVEST", or "SAFe".</p>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs sm:text-sm font-semibold px-4 py-3 rounded-xl shadow-xl flex items-center gap-2.5 z-50">
+    <i class="ph-bold ph-check text-emerald-400 dark:text-emerald-600 text-base"></i>
+    <span id="toastMsg">Copied</span>
+  </div>
+
+  <!-- Footer -->
+  <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-6 text-center text-xs text-slate-500 dark:text-slate-400 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <span><strong>Prahlad Gupta</strong> • Agile Delivery & Knowledge Repository</span>
+      <div class="flex items-center gap-4 text-slate-400 text-sm">
+        <a href="mailto:prahladgupta240886@gmail.com" class="hover:text-brand-600 transition flex items-center gap-1"><i class="ph ph-envelope"></i> Contact</a>
+        <a href="#section-1" class="hover:text-brand-600 transition">Back to Top ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // State
+    const items = document.querySelectorAll('.accordion-item');
+    const searchInput = document.getElementById('liveSearch');
+    const clearBtn = document.getElementById('clearSearch');
+    const categoryChips = document.getElementById('categoryChips');
+    const tocNav = document.getElementById('tocNav');
+    let currentCategory = 'all';
+
+    // Avatar custom file selection handler for local testing
+    const changePhotoBtn = document.getElementById('changePhotoBtn');
+    const avatarFileInput = document.getElementById('avatarFileInput');
+    const userAvatarImg = document.getElementById('userAvatarImg');
+    
+    if (changePhotoBtn && avatarFileInput && userAvatarImg) {
+      changePhotoBtn.addEventListener('click', () => avatarFileInput.click());
+      avatarFileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            userAvatarImg.src = event.target.result;
+            try {
+              localStorage.setItem('prahlad_avatar', event.target.result);
+            } catch (err) {}
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+
+      // Restore avatar if previously cached locally
+      const cachedAvatar = localStorage.getItem('prahlad_avatar');
+      if (cachedAvatar) {
+        userAvatarImg.src = cachedAvatar;
+      }
+    }
+
+    // Build Table of Contents
+    function generateTOC() {
+      tocNav.innerHTML = '';
+      items.forEach((item, index) => {
+        const title = item.querySelector('h3').textContent;
+        const id = item.id;
+        const link = document.createElement('a');
+        link.href = `#${id}`;
+        link.className = 'block py-1.5 px-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-brand-600 dark:hover:text-brand-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 truncate transition font-medium';
+        link.innerHTML = `<span class="text-slate-400 font-mono text-[10px] mr-1.5">${String(index + 1).padStart(2, '0')}.</span>${title}`;
+        
+        link.addEventListener('click', () => {
+          // Auto expand target item on navigation click
+          const body = item.querySelector('.accordion-body');
+          const btn = item.querySelector('.toggle-btn');
+          const indicator = item.querySelector('.icon-indicator');
+          const caret = item.querySelector('.caret-icon');
+          if (body.classList.contains('hidden')) {
+            body.classList.remove('hidden');
+            indicator.textContent = '−';
+            btn.classList.add('bg-brand-600', 'text-white');
+            btn.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-slate-100');
+            caret.classList.add('rotate-180');
+          }
+        });
+        
+        tocNav.appendChild(link);
+      });
+    }
+
+    // Toggle Section
+    function toggleItem(item) {
+      const body = item.querySelector('.accordion-body');
+      const btn = item.querySelector('.toggle-btn');
+      const indicator = item.querySelector('.icon-indicator');
+      const caret = item.querySelector('.caret-icon');
+      const isHidden = body.classList.contains('hidden');
+
+      if (isHidden) {
+        body.classList.remove('hidden');
+        indicator.textContent = '−';
+        btn.classList.add('bg-brand-600', 'text-white');
+        btn.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-slate-100');
+        caret.classList.add('rotate-180');
+      } else {
+        body.classList.add('hidden');
+        indicator.textContent = '+';
+        btn.classList.remove('bg-brand-600', 'text-white');
+        btn.classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-slate-100');
+        caret.classList.remove('rotate-180');
+      }
+    }
+
+    // Setup Click Handlers on Headers
+    items.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', () => toggleItem(item));
+    });
+
+    // Expand All / Collapse All
+    document.getElementById('expandAll').addEventListener('click', () => {
+      items.forEach(item => {
+        if (!item.classList.contains('hidden')) {
+          const body = item.querySelector('.accordion-body');
+          const btn = item.querySelector('.toggle-btn');
+          const indicator = item.querySelector('.icon-indicator');
+          const caret = item.querySelector('.caret-icon');
+          body.classList.remove('hidden');
+          indicator.textContent = '−';
+          btn.classList.add('bg-brand-600', 'text-white');
+          btn.classList.remove('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-slate-100');
+          caret.classList.add('rotate-180');
+        }
+      });
+    });
+
+    document.getElementById('collapseAll').addEventListener('click', () => {
+      items.forEach(item => {
+        const body = item.querySelector('.accordion-body');
+        const btn = item.querySelector('.toggle-btn');
+        const indicator = item.querySelector('.icon-indicator');
+        const caret = item.querySelector('.caret-icon');
+        body.classList.add('hidden');
+        indicator.textContent = '+';
+        btn.classList.remove('bg-brand-600', 'text-white');
+        btn.classList.add('bg-slate-200', 'dark:bg-slate-700', 'text-slate-800', 'dark:text-slate-100');
+        caret.classList.remove('rotate-180');
+      });
+    });
+
+    // Live Search & Tag Filter
+    function filterItems() {
+      const query = searchInput.value.toLowerCase().trim();
+      let visibleCount = 0;
+
+      items.forEach(item => {
+        const itemCategory = item.dataset.category;
+        const text = item.textContent.toLowerCase();
+        const matchesCategory = (currentCategory === 'all' || itemCategory === currentCategory);
+        const matchesQuery = query === '' || text.includes(query);
+
+        if (matchesCategory && matchesQuery) {
+          item.classList.remove('hidden');
+          visibleCount++;
+          // If searching with active query, auto-expand matching content
+          if (query.length > 1) {
+            const body = item.querySelector('.accordion-body');
+            const indicator = item.querySelector('.icon-indicator');
+            const btn = item.querySelector('.toggle-btn');
+            const caret = item.querySelector('.caret-icon');
+            body.classList.remove('hidden');
+            indicator.textContent = '−';
+            btn.classList.add('bg-brand-600', 'text-white');
+            caret.classList.add('rotate-180');
+          }
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+
+      document.getElementById('noResults').classList.toggle('hidden', visibleCount > 0);
+      clearBtn.classList.toggle('hidden', query.length === 0);
+    }
+
+    searchInput.addEventListener('input', filterItems);
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      filterItems();
+      searchInput.focus();
+    });
+
+    // Category Filter Chips
+    categoryChips.addEventListener('click', (e) => {
+      const pill = e.target.closest('.cat-pill');
+      if (!pill) return;
+      document.querySelectorAll('.cat-pill').forEach(btn => {
+        btn.classList.remove('bg-brand-600', 'text-white');
+        btn.classList.add('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+      });
+      pill.classList.remove('bg-slate-100', 'dark:bg-slate-800', 'text-slate-600', 'dark:text-slate-300');
+      pill.classList.add('bg-brand-600', 'text-white');
+
+      currentCategory = pill.dataset.cat;
+      filterItems();
+    });
+
+    // Dark Mode Toggle
+    const themeBtn = document.getElementById('themeToggleBtn');
+    const themeIcon = document.getElementById('themeIcon');
+    
+    themeBtn.addEventListener('click', () => {
+      document.documentElement.classList.toggle('dark');
+      const isDark = document.documentElement.classList.contains('dark');
+      themeIcon.className = isDark ? 'ph-bold ph-sun text-lg' : 'ph-bold ph-moon text-lg';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+      themeIcon.className = 'ph-bold ph-sun text-lg';
+    }
+
+    // Print & PDF
+    document.getElementById('printBtn').addEventListener('click', () => {
+      // Expand all before printing
+      items.forEach(item => item.querySelector('.accordion-body').classList.remove('hidden'));
+      window.print();
+    });
+
+    // Copy Toast Helper
+    function showToast(text) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMsg').textContent = text;
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 2400);
+    }
+
+    // Copy Markdown Handler
+    document.getElementById('copyMdBtn').addEventListener('click', () => {
+      let mdText = "# Agile, Scrum & SAFe 6.0 Knowledge Repository\n\n";
+      items.forEach(item => {
+        const title = item.querySelector('h3').textContent;
+        mdText += `## ${title}\n\n`;
+        const bodyContent = item.querySelector('.accordion-body').innerText;
+        mdText += `${bodyContent}\n\n---\n\n`;
+      });
+
+      const tempTextarea = document.createElement('textarea');
+      tempTextarea.value = mdText;
+      document.body.appendChild(tempTextarea);
+      tempTextarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextarea);
+      showToast('All 10 sections copied as Markdown!');
+    });
+
+    // Initialize
+    window.addEventListener('DOMContentLoaded', () => {
+      generateTOC();
+    });
+  </script>
+</body>
+</html>
